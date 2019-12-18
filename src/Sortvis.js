@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import './Sortvis.css';
-import './Sortingalgo.js';
-import bubblesortalgo from './Sortingalgo.js';
+import quicksortalgo from './sortingalgorithms/Quickalgo.js';
+import bubblesortalgo from './sortingalgorithms/Bubblealgo.js';
+//import mergesortalgo from './sortingalgorithms/Mergealgo.js';
+import {getMergeSortAnimations} from './sortingalgorithms/Mergealgo.js';
 
 export default class sortvis extends React.Component {
     constructor(props) {
@@ -46,9 +48,50 @@ export default class sortvis extends React.Component {
         );
     }
 
-    mergesort() {}
+    mergesort() {
+        /*console.log("called mergesortalgo from mergesort");
+        mergesortalgo(this.state.array);
+        
+        console.log("done");
+        */
+        const animations = getMergeSortAnimations(this.state.array);
+        for (let i = 0; i < animations.length; i++) {
+        const arrayBars = document.getElementsByClassName('array_bar');
+        const isColorChange = i % 3 !== 2;
+        if (isColorChange) {
+            const [barOneIdx, barTwoIdx] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 3 === 0 ? "red" : "turquoise";
+            setTimeout(() => {
+            barOneStyle.backgroundColor = color;
+            barTwoStyle.backgroundColor = color;
+            }, i * 10);
+        } else {
+            setTimeout(() => {
+            const [barOneIdx, newHeight] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            barOneStyle.height = `${newHeight}px`;
+            }, i * 10);
+        }
+        }
+    }
 
-    quicksort() {}
+    quicksort() {
+        const n = this.state.array.length;
+        const test_array  = this.state.array.slice();
+        for(let i = 0;i<n;i++)
+        {
+            //console.log(test_array[i]);
+        }
+        const quicksortedarray = quicksortalgo(this.state.array, 0, n-1);
+        console.log("sorted array");
+        for(let i = 0;i<n;i++)
+        {
+            console.log(quicksortedarray[i]);
+            document.getElementsByClassName('array_bar')[i].style.height = `${quicksortedarray[i]}px`;
+        }
+    }
 
     heapsort() {}
     
