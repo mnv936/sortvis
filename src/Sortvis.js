@@ -79,18 +79,19 @@ export default class sortvis extends React.Component {
 
     quicksort() {
         const n = this.state.array.length;
-        const test_array  = this.state.array.slice();
+        //const test_array  = this.state.array.slice();
         for(let i = 0;i<n;i++)
         {
             //console.log(test_array[i]);
         }
-        const quicksortedarray = quicksortalgo(this.state.array, 0, n-1);
+        //const quicksortedarray = quicksortalgo(this.state.array, 0, n-1);
+        quicksortalgo(this.state.array, 0, n-1);
         console.log("sorted array");
-        for(let i = 0;i<n;i++)
+       /* for(let i = 0;i<n;i++)
         {
             console.log(quicksortedarray[i]);
-            document.getElementsByClassName('array_bar')[i].style.height = `${quicksortedarray[i]}px`;
-        }
+            //document.getElementsByClassName('array_bar')[i].style.height = `${quicksortedarray[i]}px`;
+        }*/
     }
 
     heapsort() {}
